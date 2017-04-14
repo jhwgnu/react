@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import './index.css';
 
 function Square(props) {
@@ -11,6 +10,7 @@ function Square(props) {
     );
 }
 
+var size = 19;
 
 class Board extends React.Component {
     render() {
@@ -423,7 +423,6 @@ class Board extends React.Component {
     }
 }
 
-var size = 19
 var init_squares = [];
 for (var i=0; i<size; i++){
     init_squares[i] = [];
@@ -445,7 +444,7 @@ class Game extends React.Component {
 
     handleClick(i,j) {
         const squares = this.state.squares.slice(); //squares를 copy함.
-        if ( squares[i][j] != '-' || this.state.winner != null) return;
+        if ( squares[i][j] !== '-' || this.state.winner != null) return;
 
         squares[i][j] =this.state.oIsNext ? 'O' : 'X';
 
@@ -507,45 +506,45 @@ function calculateWinner(squares, i, j) {
     var val = squares[i][j];
     //좌우 체크
     for(let k=0; k<=4; k++){
-        if(j+k<=18 && j+k-4>=0){
-                if(val==squares[i][j+k] &&
-                    val==squares[i][j+k-1] &&
-                    val==squares[i][j+k-2] &&
-                    val==squares[i][j+k-3] &&
-                    val==squares[i][j+k-4]) return val;
+        if(j+k<=size-1 && j+k-4>=0){
+                if(val===squares[i][j+k] &&
+                    val===squares[i][j+k-1] &&
+                    val===squares[i][j+k-2] &&
+                    val===squares[i][j+k-3] &&
+                    val===squares[i][j+k-4]) return val;
         }
     }
 
     //위아래 체크
     for(let k=0; k<=4; k++){
-        if(i+k<=18 && i+k-4>=0){
-                if(val==squares[i+k][j] &&
-                    val==squares[i+k-1][j] &&
-                    val==squares[i+k-2][j] &&
-                    val==squares[i+k-3][j] &&
-                    val==squares[i+k-4][j]) return val;
+        if(i+k<=size-1 && i+k-4>=0){
+                if(val===squares[i+k][j] &&
+                    val===squares[i+k-1][j] &&
+                    val===squares[i+k-2][j] &&
+                    val===squares[i+k-3][j] &&
+                    val===squares[i+k-4][j]) return val;
         }
     }
 
     //왼쪽위-오른쪽아래 대각선 체크
     for(let k=0; k<=4; k++){
-        if(i+k<=18 && j+k<=18 && i+k-4>=0 && j+k-4>=0){
-                if(val==squares[i+k][j+k] &&
-                    val==squares[i+k-1][j+k-1] &&
-                    val==squares[i+k-2][j+k-2] &&
-                    val==squares[i+k-3][j+k-3] &&
-                    val==squares[i+k-4][j+k-4]) return val;
+        if(i+k<=size-1 && j+k<=size-1 && i+k-4>=0 && j+k-4>=0){
+                if(val===squares[i+k][j+k] &&
+                    val===squares[i+k-1][j+k-1] &&
+                    val===squares[i+k-2][j+k-2] &&
+                    val===squares[i+k-3][j+k-3] &&
+                    val===squares[i+k-4][j+k-4]) return val;
         }
     }
 
     //왼쪽아래-오른쪽위 대각선 체크
     for(let k=0; k<=4; k++){
-        if(i+k<=18 && j-k+4<=18 && i+k-4>=0 && j-k>=0){
-                if(val==squares[i+k][j-k] &&
-                    val==squares[i+k-1][j-k+1] &&
-                    val==squares[i+k-2][j-k+2] &&
-                    val==squares[i+k-3][j-k+3] &&
-                    val==squares[i+k-4][j-k+4]) return val;
+        if(i+k<=size-1 && j-k+4<=size-1 && i+k-4>=0 && j-k>=0){
+                if(val===squares[i+k][j-k] &&
+                    val===squares[i+k-1][j-k+1] &&
+                    val===squares[i+k-2][j-k+2] &&
+                    val===squares[i+k-3][j-k+3] &&
+                    val===squares[i+k-4][j-k+4]) return val;
         }
     }
 
